@@ -29,12 +29,17 @@ export async function POST(req){
 			expiresIn: '1d'
 		});
 		const {password: passwordHash, ...userData} = user._doc;
-		return NextResponse.json({
+		
+		const response = NextResponse.json({
 			message: 'Login successful',
 			success: true,
 			userData,
 			token
-		},{status: 200})
+		},{status: 200});
+
+		response.cookies.set('token', token,{httpOnly:true})
+
+		return response;
 	} catch (error) {
 		return NextResponse.json({error: message.error},{status: 500})
 	}
