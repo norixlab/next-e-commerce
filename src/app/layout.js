@@ -1,5 +1,8 @@
+import { Toaster } from 'react-hot-toast';
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,8 +13,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+      <html lang="en">
+          <body className={`${inter.className} flex flex-col justify-between min-h-screen`}>
+              <Header />
+              {children}
+              <Footer />
+              <Toaster position="top-center" />
+          </body>
+      </html>
+  );
 }
